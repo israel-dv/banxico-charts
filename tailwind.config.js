@@ -7,7 +7,7 @@ module.exports = {
         'blue-indigo-1000': 'rgb(36,38,51)'
       },
       height: {
-        'full-vw': '100vw'
+        'full-vh': '100vh'
       }
     }
   },

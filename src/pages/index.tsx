@@ -1,12 +1,18 @@
-import { Inter } from 'next/font/google'
+// import { Inter } from 'next/font/google'
 import Head from 'next/head'
-import Image from 'next/image'
+import { useState } from 'react'
 
-import styles from 'src/styles/Home.module.css'
+import { ListSeries } from 'src/components/ListSeries'
+import { useGetSeries } from 'src/hooks/useGetSeries'
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [isEmptyList, setIsEmptyList] = useState<boolean>(false)
+  const [selectedSeries, setSelectedSeries] = useState<string[]>([])
+
+  const { data: series, isLoading } = useGetSeries({ onError: () => setIsEmptyList(true) })
+
   return (
     <>
       <Head>
@@ -15,8 +21,17 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="w-full h-full flex">
-        <div>hola</div>
+      <main className="h-full w-full h-f flex items-center">
+        {series ? (
+          <ListSeries
+            isLoading={isLoading}
+            series={series.data}
+            isEmpty={isEmptyList}
+            setSeries={setSelectedSeries}
+          />
+        ) : (
+          <div>error</div>
+        )}
       </main>
     </>
   )
