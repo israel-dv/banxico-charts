@@ -1,8 +1,10 @@
 // import { Inter } from 'next/font/google'
+import { log } from 'console'
 import Head from 'next/head'
 import { useState } from 'react'
 
 import { ListSeries } from 'src/components/ListSeries'
+import { RoundedButton } from 'src/components/RoundedButton'
 import { useGetSeries } from 'src/hooks/useGetSeries'
 
 // const inter = Inter({ subsets: ['latin'] })
@@ -21,7 +23,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="h-full w-full h-f flex items-center">
+      <main className="h-full w-full h-f flex items-center flex-col">
+        <div className="mt-52">
+          <h1 className="text-3xl bold text-center py-8">Welcome to Banxico Charts.</h1>
+          <p className="pb-8 text-lg">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti nemo quaerat odio,
+            odit labore pariatur nesciunt ut voluptatem laboriosam omnis accusantium rem optio.
+            Molestiae nobis commodi quos eveniet esse voluptatum.
+          </p>
+        </div>
         {series ? (
           <ListSeries
             isLoading={isLoading}
@@ -32,6 +42,11 @@ export default function Home() {
         ) : (
           <div>error</div>
         )}
+        <div className="w-full py-7 flex justify-end">
+          <RoundedButton disabled={selectedSeries.length === 0} onClick={() => console.log('next')}>
+            Next
+          </RoundedButton>
+        </div>
       </main>
     </>
   )

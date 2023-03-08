@@ -3,10 +3,6 @@ import { UseQueryOptions, UseQueryResult, useQuery } from 'react-query'
 import { getSeries } from 'src/api/series'
 import { SeriesResponse } from 'src/utils/types/SeriesProps.types'
 
-type UseGetSeriesProps = {
-  options?: UseQueryOptions<unknown, Error, SeriesResponse, string[]>
-}
-
 /**
  *
  * function onError supply try-catch on propmise in getSeries
