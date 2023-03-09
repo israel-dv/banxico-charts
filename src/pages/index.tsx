@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 import { ListSeries } from 'src/components/ListSeries'
 import { RoundedButton } from 'src/components/RoundedButton'
+import { SwitchOption } from 'src/components/SwitchOption'
 import { useGetSeries } from 'src/hooks/useGetSeries'
 
 // const inter = Inter({ subsets: ['latin'] })
@@ -12,6 +13,7 @@ import { useGetSeries } from 'src/hooks/useGetSeries'
 export default function Home() {
   const [isEmptyList, setIsEmptyList] = useState<boolean>(false)
   const [selectedSeries, setSelectedSeries] = useState<string[]>([])
+  const [isShowModal, setIsShowModal] = useState<boolean>(false)
 
   const { data: series, isLoading } = useGetSeries({ onError: () => setIsEmptyList(true) })
 
@@ -43,10 +45,36 @@ export default function Home() {
           <div>error</div>
         )}
         <div className="w-full py-7 flex justify-end">
-          <RoundedButton disabled={selectedSeries.length === 0} onClick={() => console.log('next')}>
+          <RoundedButton
+            disabled={selectedSeries.length === 0}
+            onClick={() => setIsShowModal((showModal) => !showModal)}
+          >
             Next
           </RoundedButton>
         </div>
+        {isShowModal ? (
+          <div className="h-full w-full bg-gray-opacity absolute flex justify-center items-center">
+            <div className="h-2/3 w-1/2 bg-gray-50 flex flex-col px-11 py-16 rounded-xl">
+              <SwitchOption optionA="Table" optionB="Chart" className="my-1" />
+              <div className="flex w-full justify-between">
+                <RoundedButton
+                  onClick={() => setIsShowModal((showModal) => !showModal)}
+                  disabled={false}
+                  className="bg-blue-400 text-white text-center justify-center w-full mr-5"
+                >
+                  CLOSE
+                </RoundedButton>
+                <RoundedButton
+                  onClick={() => setIsShowModal((showModal) => !showModal)}
+                  disabled={false}
+                  className="bg-black text-white text-center justify-center w-full"
+                >
+                  APPLY
+                </RoundedButton>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </main>
     </>
   )

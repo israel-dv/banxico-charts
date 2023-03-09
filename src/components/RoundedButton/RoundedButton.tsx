@@ -14,14 +14,15 @@ export const RoundedButton: React.FC<RoundedButtonProps> = ({
   onClick
 }) => {
   return (
-    <div
-      className={`h-10 bg-slate-50 flex items-center px-2 rounded-md text-black ${className} ${
-        disabled && 'opacity-20 cursor-none'
-      }`}
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={`h-10 bg-slate-50 flex items-center px-2 rounded-md text-black cursor-pointer ${className} ${
+        disabled && 'opacity-20 cursor-default'
+      } `}
     >
-      <button type="button" onClick={onClick} disabled={disabled}>
-        {children}
-      </button>
-    </div>
+      {children}
+    </button>
   )
 }
